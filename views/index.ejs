@@ -6,9 +6,11 @@
 		<script src="/javascripts/leap-0.4.3.min.js"></script>
 		<script src="/javascripts/jquery-1.11.0.js"></script>
 		<script src="/javascripts/angular.js"></script>
+		<script src="/javascripts/controller.js"></script>
   </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  <body ng-app="HandLeapApp">
+		<div class="main" ng-controller="HandLeapController">
+			Hello {{test}}
+		</div>
   </body>
 </html>
