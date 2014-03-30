@@ -6,7 +6,7 @@ HandLeapApp.controller('HandLeapController', function ($scope) {
 	$scope.connectionStatus = "NOTHING GREAT.. Connect the device";
 
 	var init = function(){
-		$scope.controller = new Leap.Controller();
+		$scope.controller = new Leap.Controller({ enableGestures: true });
 
 		$scope.controller.on('connect', function() {
 			console.log("Connected");
@@ -23,7 +23,20 @@ HandLeapApp.controller('HandLeapController', function ($scope) {
 		  changeStatus("A Leap device has been disconnected.");
 		});
 
+		$scope.controller.on('frame', function(frame){
+			$scope.$apply(function(){
+				frameChanged(frame);
+			});
+		});
+
 		$scope.controller.connect();
+	}
+
+	var frameChanged = function(frame) {
+		_.each(frame.gestures, function(gesture){
+			console.log("Gesture "+gesture);
+			$scope.gestureType = gesture.type;
+		});
 	}
 
 	var changeStatus = function(status){
