@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-		<script src="/javascripts/leap-0.4.3.min.js"></script>
-		<script src="/javascripts/jquery-1.11.0.js"></script>
-		<script src="/javascripts/angular.js"></script>
-    <script src="/javascripts/underscore.js"></script>
-		<script src="/javascripts/controller.js"></script>
-  </head>
-  <body ng-app="HandLeapApp">
-		<div class="main" ng-controller="HandLeapController">
-			<h1> Connection Status </h1>
-			<h2> {{connectionStatus}} </h2>
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+  <script src="/javascripts/leap-0.4.3.min.js"></script>
+  <script src="/javascripts/jquery-1.11.0.js"></script>
+  <script src="/javascripts/angular.js"></script>
+  <script src="/javascripts/underscore.js"></script>
+  <script src="/javascripts/controller.js"></script>
+</head>
+<body ng-app="HandLeapApp">
+<div class="main" ng-controller="HandLeapController">
+  <div class="gesture">
+    <h1> Connection Status </h1>
 
-      <div>
-        <h3>Gesture made = {{gestureType}}</h3>
-      </div>
-		</div>
-  </body>
+    <h2> {{connectionStatus}} </h2>
+
+    <div>
+      <h3>Gesture made = {{gestureType}}</h3>
+    </div>
+  </div>
+  <div>
+    <div class="playlistButtons">
+      <button value="prev" ng-click="player('prev')"> &lt;Prev </button>
+      <button value="stop" ng-click="player('stop')"> [] Stop </button>
+      <button value="next" ng-click="player('next')"> &gt; Next </button>
+    </div>
+
+    <input type="range" min="1" max="100" ng-change="changeVolume()" ng-model="volumeLevel"/>
+    <span class="volume">{{volumeLevel}}</span>
+  </div>
+</div>
+
+</body>
 </html>
