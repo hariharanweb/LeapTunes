@@ -47,13 +47,13 @@ HandLeapApp.controller('HandLeapController', function ($scope, $http) {
         });
     }
     $scope.player = function (type) {
-        $http.get('playlist/'+type).success(function(data){
+        $http.get('player/playlist/'+type).success(function(data){
             console.log(data);
         })
     }
     
     $scope.changeVolume = function () {
-        $http.get('volume?level='+$scope.volumeLevel).success(function(data){
+        $http.get('player/volume?level='+$scope.volumeLevel).success(function(data){
             console.log(data);
         })
     }

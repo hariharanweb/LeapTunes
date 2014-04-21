@@ -27,11 +27,11 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-app.get('/playlist/next', player.next);
-app.get('/playlist/stop', player.stop);
-app.get('/playlist/prev', player.prev);
+app.get('/player/playlist/next', player.next);
+app.get('/player/playlist/play', player.play);
+app.get('/player/playlist/prev', player.prev);
 
-app.get('/volume', player.changeVolume);
+app.get('/player/volume', player.changeVolume);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

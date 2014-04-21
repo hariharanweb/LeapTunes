@@ -6,7 +6,7 @@ exports.prev = function(req,res){
     res.send("Success prev");
 }
 
-exports.stop = function(req,res){
+exports.play = function(req,res){
     res.send("Success stop");
 }
 
