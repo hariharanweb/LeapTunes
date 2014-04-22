@@ -2,7 +2,7 @@ var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
-var player = require('./routes/player');
+var itunes = require('./routes/itunes');
 
 var app = express();
 
@@ -26,11 +26,11 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 
 
-app.get('/player/playlist/next', player.next);
-app.get('/player/playlist/play', player.play);
-app.get('/player/playlist/prev', player.prev);
+app.get('/player/playlist/next', itunes.next);
+app.get('/player/playlist/play', itunes.play);
+app.get('/player/playlist/prev', itunes.prev);
 
-app.get('/player/volume', player.changeVolume);
+app.get('/player/volume', itunes.changeVolume);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
