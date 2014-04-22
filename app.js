@@ -1,6 +1,5 @@
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var player = require('./routes/player');
@@ -25,7 +24,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+
 
 app.get('/player/playlist/next', player.next);
 app.get('/player/playlist/play', player.play);
