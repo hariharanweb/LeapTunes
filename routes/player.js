@@ -1,72 +1,47 @@
 var applescript = require("applescript");
-
+var Q = require("Q");
 
 var nextTrackCommand = 'tell application "iTunes" \n next track \nend tell';
 var previousTrackCommand = 'tell application "iTunes" \n previous track \nend tell';
 var playPauseCommand = 'tell application "iTunes" \n playpause \nend tell';
 var changeVolumeCommand = 'tell application "iTunes" \n set the sound volume to %d \nend tell';
+var trackNameCommand = 'tell application "iTunes" \n get name of current track \nend tell';
 
 exports.next = function (req, res) {
-  applescript.execString(nextTrackCommand, function (err, rtn) {
-    if (!err) {
-      res.send("Success next");
-    } else {
-      console.log(err);
-      res.send("Next song failed");
-    }
+  executeAppleScript(nextTrackCommand).then(getTrackName).then(function(trackName){
+    res.send({"trackName":trackName});
   });
 }
 
 exports.prev = function (req, res) {
-  applescript.execString(previousTrackCommand, function (err, rtn) {
-    if (!err) {
-      res.send("Success prev");
-    } else {
-      console.log(err);
-      res.send("Prev song failed");
-    }
+  executeAppleScript(previousTrackCommand).then(getTrackName).then(function(trackName){
+    res.send({"trackName":trackName});
   });
 }
 
 exports.play = function (req, res) {
-  applescript.execString(playPauseCommand, function (err, rtn) {
-    if (!err) {
-      res.send("Success play");
-    } else {
-      console.log(err);
-      res.send("Play/Pause failed");
-    }
+  executeAppleScript(playPauseCommand).then(getTrackName).then(function(trackName){
+    res.send({"trackName":trackName});
   });
 }
 
 exports.changeVolume = function (req, res) {
-  var command = changeVolumeCommand.replace("%d", req.query.level)
-
-  applescript.execString(command, function (err, rtn) {
-    if (!err) {
-      res.send("Volume set at " + req.query.level);
-    } else {
-      console.log(err);
-      res.send("Play/Pause failed");
-    }
+  var command = changeVolumeCommand.replace("%d", req.query.level);
+  executeAppleScript(command).then(function () {
+    res.send("Volume set at " + req.query.level);
   });
 }
 
+var getTrackName = function () {
+  return executeAppleScript(trackNameCommand);
+}
 
-/*
- var applescript = require("applescript");
-
- // Very basic AppleScript command. Returns the song name of each
- // currently selected track in iTunes as an 'Array' of 'String's.
- var script = 'tell application "iTunes" to get name of selection';
-
- applescript.execString(script, function(err, rtn) {
- if (err) {
- // Something went wrong!
- }
- if (Array.isArray(rtn)) {
- rtn.forEach(function(songName) {
- console.log(songName);
- });
- }
- });*/
+var executeAppleScript = function(command) {
+  var defer = Q.defer();
+  applescript.execString(command, function (err, rtn) {
+    if(err)
+      console.log(err);
+    defer.resolve(rtn);
+  });
+  return defer.promise;
+}

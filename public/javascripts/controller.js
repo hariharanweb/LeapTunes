@@ -5,6 +5,7 @@ HandLeapApp.controller('HandLeapController', function ($scope, $http) {
     $scope.controller = {};
     $scope.connectionStatus = "NOTHING GREAT.. Connect the device";
     $scope.volumeLevel = 1;
+    $scope.trackName = "";
 
     var init = function () {
         $scope.controller = new Leap.Controller({ enableGestures: true });
@@ -48,8 +49,8 @@ HandLeapApp.controller('HandLeapController', function ($scope, $http) {
     }
     $scope.player = function (type) {
         $http.get('player/playlist/'+type).success(function(data){
-            console.log(data);
-        })
+          $scope.trackName = data["trackName"];
+        });
     }
     
     $scope.changeVolume = function () {
