@@ -3,15 +3,19 @@
 <head>
   <title><%= title %></title>
   <link rel='stylesheet' href='/stylesheets/style.css'/>
+  <link rel='stylesheet' href='/stylesheets/bootstrap.css'/>
+  <link rel='stylesheet' href='/stylesheets/bootstrap-theme.css'/>
+
   <script src="/javascripts/leap-0.4.3.min.js"></script>
   <script src="/javascripts/jquery-1.11.0.js"></script>
   <script src="/javascripts/angular.js"></script>
   <script src="/javascripts/underscore.js"></script>
   <script src="/javascripts/controller.js"></script>
+  <script src="/javascripts/bootstrap.js"></script>
 </head>
 <body ng-app="HandLeapApp">
 <div class="main" ng-controller="HandLeapController">
-  <div class="gesture">
+  <div class="gesture row">
     <h1> Connection Status </h1>
 
     <h2> {{connectionStatus}} </h2>
@@ -20,16 +24,34 @@
       <h3>Gesture made = {{gestureType}}</h3>
     </div>
   </div>
-  <div>
-    <h1>Track: {{trackName}}</h1>
-    <div class="playlistButtons">
-      <button value="prev" ng-click="player('prev')"> &lt;Prev </button>
-      <button value="stop" ng-click="player('play')"> || &gt; Play </button>
-      <button value="next" ng-click="player('next')"> &gt; Next </button>
+  <div class="row">
+    <h3 class="row">
+      <span class="glyphicon glyphicon-music"></span>
+      {{trackName}}
+      <span class="glyphicon glyphicon-music"></span>
+    </h3>
+
+    <div class="playlist-buttons row">
+      <button value="prev" ng-click="player('prev')">
+        <span class="glyphicon glyphicon-fast-backward"></span>
+      </button>
+      <button value="stop" ng-click="player('play')">
+        <span class="glyphicon glyphicon-pause"></span>
+        <span class="glyphicon glyphicon-play"></span>
+      </button>
+      <button value="next" ng-click="player('next')">
+        <span class="glyphicon glyphicon-fast-forward"></span>
+      </button>
     </div>
 
-    <input type="range" min="1" max="100" ng-change="changeVolume()" ng-model="volumeLevel"/>
-    <span class="volume">{{volumeLevel}}</span>
+    <div class="row">
+      <div class="col-lg-8">
+        <span class="glyphicon glyphicon-volume-down volume-down"></span>
+        <input type="range" min="1" max="100" ng-change="changeVolume()" ng-model="volumeLevel" class="slider"/>
+        <span class="glyphicon glyphicon-volume-up volume-up"></span>
+      </div>
+      <span class="volume">{{volumeLevel}}</span>
+    </div>
   </div>
 </div>
 

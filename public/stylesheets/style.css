@@ -3,6 +3,18 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.slider{
+    float: left;
+    width: 95% !important;
+}
+
+.volume-up {
+    float: right;
+}
+.volume-down {
+    float: left;
+}
+
+.playlist-buttons {
+    padding-bottom: 2%;
 }
