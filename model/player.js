@@ -32,6 +32,12 @@ exports.changeVolume = function (level) {
   return executeAppleScript(command);
 };
 
+exports.trackInfo = function () {
+  return executeAppleScript(trackNameCommand).then(function (trackName) {
+    return {"trackName":trackName};
+  });
+};
+
 var getTrackName = function () {
   return executeAppleScript(trackNameCommand);
 }

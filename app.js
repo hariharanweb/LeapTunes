@@ -29,6 +29,7 @@ app.get('/', routes.index);
 app.get('/player/playlist/next', itunes.next);
 app.get('/player/playlist/play', itunes.play);
 app.get('/player/playlist/prev', itunes.prev);
+app.get('/player/playlist/trackInfo', itunes.trackInfo);
 
 app.get('/player/volume', itunes.changeVolume);
 

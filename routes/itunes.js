@@ -18,9 +18,21 @@ exports.play = function (req, res) {
   });
 }
 
+exports.trackInfo = function (req, res) {
+  player.trackInfo().then(function(trackInfo){
+    res.send(trackInfo);
+  });
+}
+
 exports.changeVolume = function (req, res) {
   player.changeVolume(req.query.level).then(function () {
     res.send("Volume set at " + req.query.level);
+  });
+}
+
+exports.play = function (req, res) {
+  player.playPause().then(function(trackInfo){
+    res.send(trackInfo);
   });
 }
 
