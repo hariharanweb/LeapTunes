@@ -36,5 +36,11 @@ exports.play = function (req, res) {
   });
 }
 
+exports.volume = function (req, res) {
+  player.volume().then(function(volume){
+    res.send(volume);
+  });
+}
+
 
 

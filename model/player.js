@@ -7,23 +7,24 @@ var previousTrackCommand = 'tell application "iTunes" \n previous track \nend te
 var playPauseCommand = 'tell application "iTunes" \n playpause \nend tell';
 var changeVolumeCommand = 'tell application "iTunes" \n set the sound volume to %d \nend tell';
 var trackNameCommand = 'tell application "iTunes" \n get name of current track \nend tell';
+var getVolumeCommand = 'tell application "iTunes" \n get sound volume \nend tell';
 
 
 exports.next = function () {
-  return executeAppleScript(nextTrackCommand).then(getTrackName).then(function(trackName){
-    return {"trackName":trackName};
+  return executeAppleScript(nextTrackCommand).then(getTrackName).then(function (trackName) {
+    return {"trackName": trackName};
   });
 };
 
 exports.previous = function () {
-  return executeAppleScript(previousTrackCommand).then(getTrackName).then(function(trackName){
-    return {"trackName":trackName};
+  return executeAppleScript(previousTrackCommand).then(getTrackName).then(function (trackName) {
+    return {"trackName": trackName};
   });
 };
 
 exports.playPause = function () {
-  return executeAppleScript(playPauseCommand).then(getTrackName).then(function(trackName){
-    return {"trackName":trackName};
+  return executeAppleScript(playPauseCommand).then(getTrackName).then(function (trackName) {
+    return {"trackName": trackName};
   });
 };
 
@@ -34,18 +35,24 @@ exports.changeVolume = function (level) {
 
 exports.trackInfo = function () {
   return executeAppleScript(trackNameCommand).then(function (trackName) {
-    return {"trackName":trackName};
+    return {"trackName": trackName};
   });
 };
+
+exports.volume = function () {
+  return executeAppleScript(getVolumeCommand).then(function (volume) {
+    return {"volume": volume};
+  });
+}
 
 var getTrackName = function () {
   return executeAppleScript(trackNameCommand);
 }
 
-var executeAppleScript = function(command) {
+var executeAppleScript = function (command) {
   var defer = Q.defer();
   applescript.execString(command, function (err, rtn) {
-    if(err)
+    if (err)
       console.log(err);
     defer.resolve(rtn);
   });

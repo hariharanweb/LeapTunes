@@ -36,6 +36,7 @@ HandLeapApp.controller('HandLeapController', function ($scope, $http) {
     $scope.controller.connect();
 
     getTrackInfo();
+    getVolume();
   }
 
   var frameChanged = function (frame) {
@@ -57,7 +58,7 @@ HandLeapApp.controller('HandLeapController', function ($scope, $http) {
   }
 
   $scope.changeVolume = function () {
-    $http.get('player/volume?level=' + $scope.volumeLevel).success(function (data) {
+    $http.get('player/setVolume?level=' + $scope.volumeLevel).success(function (data) {
       console.log(data);
     })
   }
@@ -66,6 +67,12 @@ HandLeapApp.controller('HandLeapController', function ($scope, $http) {
     $http.get('player/playlist/trackInfo').success(function (data) {
       $scope.trackName = data["trackName"];
     })
+  }
+
+  var getVolume = function () {
+    $http.get('player/volume').success(function (data) {
+      $scope.volumeLevel = data["volume"];
+    });
   }
 
   init();
