@@ -30,6 +30,7 @@ app.get('/player/playlist/next', itunes.next);
 app.get('/player/playlist/play', itunes.play);
 app.get('/player/playlist/prev', itunes.prev);
 app.get('/player/playlist/trackInfo', itunes.trackInfo);
+app.get('/player/playlist/tracks', itunes.tracks);
 
 app.get('/player/setVolume', itunes.changeVolume);
 app.get('/player/volume', itunes.volume);

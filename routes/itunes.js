@@ -42,5 +42,11 @@ exports.volume = function (req, res) {
   });
 }
 
+exports.tracks = function (req, res) {
+  player.trackList().then(function (tracks) {
+    res.send(tracks);
+  });
+}
+
 
 

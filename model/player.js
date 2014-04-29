@@ -1,7 +1,6 @@
 var applescript = require("applescript");
 var Q = require("Q");
 
-
 var nextTrackCommand = 'tell application "iTunes" \n next track \nend tell';
 var previousTrackCommand = 'tell application "iTunes" \n previous track \nend tell';
 var playPauseCommand = 'tell application "iTunes" \n playpause \nend tell';
@@ -9,6 +8,15 @@ var changeVolumeCommand = 'tell application "iTunes" \n set the sound volume to 
 var trackNameCommand = 'tell application "iTunes" \n get name of current track \nend tell';
 var getVolumeCommand = 'tell application "iTunes" \n get sound volume \nend tell';
 
+var trackListCommand =
+  'tell application "iTunes" \n ' +
+  'set myList to {} \n ' +
+  'repeat with x in tracks of (view of front window) \n' +
+    'set songItem to {{name of x, id of x}}\n' +
+    'set myList to myList & songItem\n' +
+    'end repeat\n' +
+    'get myList\n' +
+    'end tell';
 
 exports.next = function () {
   return executeAppleScript(nextTrackCommand).then(getTrackName).then(function (trackName) {
@@ -42,6 +50,12 @@ exports.trackInfo = function () {
 exports.volume = function () {
   return executeAppleScript(getVolumeCommand).then(function (volume) {
     return {"volume": volume};
+  });
+}
+
+exports.trackList = function() {
+  return executeAppleScript(trackListCommand).then(function (tracks) {
+    return tracks;
   });
 }
 
