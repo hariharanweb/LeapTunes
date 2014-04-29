@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= title %></title>
+  <title>Leap Tunes</title>
   <link rel='stylesheet' href='/stylesheets/style.css'/>
   <link rel='stylesheet' href='/stylesheets/bootstrap.css'/>
   <link rel='stylesheet' href='/stylesheets/bootstrap-theme.css'/>
@@ -15,7 +15,7 @@
 </head>
 <body ng-app="HandLeapApp">
 <div class="main" ng-controller="HandLeapController">
-  <div class="gesture row">
+  <div class="gesture row" style="display: none">
     <h1> Connection Status </h1>
 
     <h2> {{connectionStatus}} </h2>
@@ -23,6 +23,13 @@
     <div>
       <h3>Gesture made = {{gestureType}}</h3>
     </div>
+  </div>
+  <div class="playlist row">
+    <ul>
+      <li ng-repeat="track in tracks">
+        {{track.name}}
+      </li>
+    </ul>
   </div>
   <div class="row">
     <h3 class="row">
@@ -52,13 +59,7 @@
       </div>
     </div>
 
-    <div class="playlist row">
-      <ul>
-        <li ng-repeat="track in tracks">
-          {{track.name}}
-        </li>
-      </ul>
-    </div>
+
 
 
   </div>
