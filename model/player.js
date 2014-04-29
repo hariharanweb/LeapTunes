@@ -1,5 +1,6 @@
 var applescript = require("applescript");
 var Q = require("Q");
+var _ = require("underscore");
 
 var nextTrackCommand = 'tell application "iTunes" \n next track \nend tell';
 var previousTrackCommand = 'tell application "iTunes" \n previous track \nend tell';
@@ -55,7 +56,10 @@ exports.volume = function () {
 
 exports.trackList = function() {
   return executeAppleScript(trackListCommand).then(function (tracks) {
-    return tracks;
+    var items = _.map(tracks, function (track) {
+      return {"name":track[0], "id":track[1]};
+    })
+    return items;
   });
 }
 
