@@ -42,16 +42,25 @@
       <button value="next" ng-click="player('next')">
         <span class="glyphicon glyphicon-fast-forward"></span>
       </button>
+      <div class="row">
+        <div class="col-lg-8">
+          <span class="glyphicon glyphicon-volume-down volume-down"></span>
+          <input type="range" min="1" max="100" ng-change="changeVolume()" ng-model="volumeLevel" class="slider"/>
+          <span class="glyphicon glyphicon-volume-up volume-up"></span>
+        </div>
+        <span class="volume">{{volumeLevel}}</span>
+      </div>
     </div>
 
-    <div class="row">
-      <div class="col-lg-8">
-        <span class="glyphicon glyphicon-volume-down volume-down"></span>
-        <input type="range" min="1" max="100" ng-change="changeVolume()" ng-model="volumeLevel" class="slider"/>
-        <span class="glyphicon glyphicon-volume-up volume-up"></span>
-      </div>
-      <span class="volume">{{volumeLevel}}</span>
+    <div class="playlist row">
+      <ul>
+        <li ng-repeat="track in tracks">
+          {{track.name}}
+        </li>
+      </ul>
     </div>
+
+
   </div>
 </div>
 
